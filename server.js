@@ -42,5 +42,5 @@ app.post('/add',(req,res)=>{
         feel:req.body.feel
     };
     projectData.push(newData);//Pushing the new data recieved into the array of data
-    res.send('Data is recieved');//Sending this array back as a response
+    res.send('newData');//Sending this back as a response
 });
