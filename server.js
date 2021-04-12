@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {animal:'Lion'};
+projectData = [];
 
 // Require Express to run server and routes
 const express = require('express');
@@ -14,25 +14,32 @@ app.use(bodyParser.json());
 // Cors for cross origin allowance
 const cors=require('cors');
 // Initialize the main project folder
-app.use(express.static('website'));
 app.use(cors());
-
+app.use(express.static('website'));
 
 // Setup Server
-const port = 5500;
+const port = 3000;
 const server=app.listen(port,()=>{
     console.log(`Running on localhost: ${port}`);
 });
 
+const baseURL = 'api.openweathermap.org/data/2.5/weather?zip=';//The base URL for the fetch
+const api = '55ba44213f055d67b3dd9a6db2232132';//The personal API key obtained from 
+
 app.get('/all',(req,res)=>{
+    console.log(projectData);
     res.send(projectData);
+    projectData=[]; 
+    //res.send('welcome');
 });
 
 app.post('/add',(req,res)=>{
+    console.log(req.body);
     let newData={
-        temperature:req.body.temperature,
+        temp:req.body.temp,
         date:req.body.date,
-        userResponse:req.body.userResponse
+        feel:req.body.feel
     };
     projectData.push(newData);
+    res.send(newData);
 });
